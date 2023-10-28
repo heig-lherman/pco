@@ -1,0 +1,33 @@
+# Maintainer: Loïc Herman <me@l8n.ch>
+pkgname=pcosynchro-git
+pkgver=r37.3cc9592
+pkgrel=1
+pkgdesc='PcoSynchro is a library of classes implementing the classical synchronization mechanisms.'
+arch=('x86_64')
+url='https://reds-gitlab.heig-vd.ch/reds-public/pco-synchro'
+license=('GPL')
+groups=()
+depends=('qt5-base')
+makedepends=('git')
+provides=("${pkgname%-VCS}")
+conflicts=("${pkgname%-VCS}")
+options=(!strip)
+source=("$pkgname::git+$url.git#branch=master")
+md5sums=('SKIP')
+
+pkgver() {
+	cd "$srcdir/${pkgname%-VCS}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+	cd "$srcdir/${pkgname%-VCS}/lib/pcosynchro"
+	sed -i 's/\/usr\/local\//\/usr\//' pcosynchro.pro
+	qmake
+	make
+}
+
+package() {
+	cd "$srcdir/${pkgname%-VCS}/lib/pcosynchro"
+	make install INSTALL_ROOT="$pkgdir"
+}
