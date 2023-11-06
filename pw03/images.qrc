@@ -1,0 +1,16 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/">
+        <file alias="images/copper.png">images/copper.png</file>
+        <file alias="images/funds_color.png">images/funds_color.png</file>
+        <file alias="images/sand.png">images/sand.png</file>
+        <file alias="images/Microchips.png">images/Microchips.png</file>
+        <file alias="images/Service_bots.png">images/Service_bots.png</file>
+        <file alias="images/station-essence.png">images/station-essence.png</file>
+        <file alias="images/Plastics.png">images/Plastics.png</file>
+        <file alias="images/copper_scaled.png">images/copper_scaled.png</file>
+        <file alias="images/factory_scaled.png">images/factory_scaled.png</file>
+        <file alias="images/petrol_scaled.png">images/petrol_scaled.png</file>
+        <file alias="images/warehouse_scaled.png">images/warehouse_scaled.png</file>
+        <file alias="images/sand_scaled.png">images/sand_scaled.png</file>
+    </qresource>
+</RCC>
