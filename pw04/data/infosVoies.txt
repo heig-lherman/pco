@@ -1,0 +1,33 @@
+2200 droite 180.0
+2201 droite 90.0
+2202 droite 45.0
+2203 droite 30.0
+2204 droite 22.5
+2206 droite 168.9
+2207 droite 156.0
+2208 droite 35.1
+2291 droite 180.0
+2293 droite 41.3
+2210 courbe 45.0 295.4
+2221 courbe 30.0 360.0
+2223 courbe 15.0 360.0
+2224 courbe 7.5 360.0
+2231 courbe 30.0 424.6
+2232 courbe 22.5 424.6
+2233 courbe 15.0 424.6
+2234 courbe 7.5 424.6
+2235 courbe 3.75 424.6
+2261 aiguillage 22.5 424.6 168.9
+2267 aiguillageEnroule 30.0 360.0 64.6
+2270 aiguillageTriple 22.5 424.6 168.9
+2258 croisement 45.0 90.0
+2260 traversee-jonction 22.5 424.6 168.9
+7391 buttoir 38.0
+EOF
+Notes :
+Les droites sont ont leur longueur comme parametre.
+Les courbes ont leur angle et leur rayon comme parametres.
+Les aiguillages ont leur angle, leur rayon et leur longueur (pour la partie droite) comme parametres.
+Les croisements on leur angle et leur longueur comme parametres.
+Les traversee-jonction ont leur angle, leur rayon et leur longueur (pour les parties droites) comme parametres.
+Les buttoir ont leur longueur comme parametre.

@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="images/explosion.png">./images/explosion.png</file>
+    <file alias="images/simulate_break.png">./images/simulate_break.png</file>
+    <file alias="images/simulate_end.png">./images/simulate_end.png</file>
+    <file alias="images/simulate_msteps.png">./images/simulate_msteps.png</file>
+    <file alias="images/simulate_msteps_update.png">./images/simulate_msteps_update.png</file>
+    <file alias="images/simulate_reset.png">./images/simulate_reset.png</file>
+    <file alias="images/simulate_restart.png">./images/simulate_restart.png</file>
+    <file alias="images/simulate_run.png">./images/simulate_run.png</file>
+    <file alias="images/simulate_start.png">./images/simulate_start.png</file>
+    <file alias="images/simulate_step.png">./images/simulate_step.png</file>
+    <file alias="images/zoomin.png">./images/zoomin.png</file>
+    <file alias="images/zoomout.png">./images/zoomout.png</file>
+    <file alias="sound/explosion.wav">./sound/explosion.wav</file>
+  </qresource>
+</RCC>
+
