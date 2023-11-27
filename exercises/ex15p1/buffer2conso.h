@@ -18,20 +18,21 @@ public:
     virtual ~Buffer2ConsoSemaphore() {}
 
     virtual void put(T item) {
-        empty.acquire();
-        empty.acquire();
         mutex.acquire();
-        element = item;
+        empty.acquire();
+        empty.acquire();
         mutex.release();
+
+        element = item;
+ 
         full.release();
         full.release();
     }
-    
+
     virtual T get(void) {
+        T item;
         full.acquire();
-        mutex.acquire();
-        T item = element;
-        mutex.release();
+        item = element;
         empty.release();
         return item;
     }
