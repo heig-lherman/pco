@@ -5,7 +5,7 @@
 class BridgeManagerFloat
 {
   private: 
-    PcoSemaphore wait{0}, block{1};
+    PcoSemaphore wait{0}, block{1}, fifo{1};
     float maxWeight, curWeight{0};
     unsigned nbWaiting{0};
 
@@ -14,16 +14,17 @@ class BridgeManagerFloat
     ~BridgeManagerFloat() {} 
 
     void access(float weight) {
+      fifo.acquire();
       block.acquire();
       while (curWeight + weight > maxWeight) {
         nbWaiting++;
         block.release();
         wait.acquire();
         block.acquire();
-        nbWaiting--;
       }
       curWeight += weight;
       block.release();
+      fifo.release();
     }
 
     void leave(float weight) {
@@ -32,6 +33,7 @@ class BridgeManagerFloat
       for (int i = 0; i < nbWaiting; ++i) {
         wait.release();
       }
+      nbWaiting = 0;
       block.release();
     }
 };
