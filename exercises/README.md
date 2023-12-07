@@ -8,3 +8,4 @@
 - [x] [Exercise 13.2](ex13p2)
 - [x] [Exercise 13.3](ex13p3)
 - [x] [Exercise 15.1](ex15p1)
+- [x] [Exercise 16.1](ex16p1)
