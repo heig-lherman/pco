@@ -11,3 +11,6 @@
 - [x] [Exercise 16.1](ex16p1)
 - [x] [Exercise 16.2](ex16p2)
 - [x] [Exercise 16.3](ex16p3)
+- [x] [Exercise 20.1](ex20p1)
+- [x] [Exercise 20.2](ex20p2)
+- [x] [Exercise 20.3](ex20p3)

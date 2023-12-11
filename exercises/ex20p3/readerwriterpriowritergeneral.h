@@ -16,60 +16,64 @@
 #define READERWRITERPRIOWRITERGENERAL_H
 
 #include <pcosynchro/pcohoaremonitor.h>
-#include <pcosynchro/pcosemaphore.h>
 
 #include "abstractreaderwriter.h"
 
-class ReaderWriterPrioWriterGeneral : public AbstractReaderWriter {
+class ReaderWriterPrioWriterGeneral : public AbstractReaderWriter,
+                                      public PcoHoareMonitor {
 protected:
-  PcoSemaphore rmutex{1}, wmutex{1}, tryRead{1}, resource{1};
+  PcoHoareMonitor::Condition lock;
+
   int rcount{0}, wcount{0};
+  bool wactive{false};
 
 public:
   ReaderWriterPrioWriterGeneral() {}
 
   void lockReading() {
-    tryRead.acquire();
-    rmutex.acquire();
+    monitorIn();
+
+    if (wcount > 0 || wactive) {
+      wait(lock);
+    }
 
     rcount++;
-    if (rcount == 1)
-      resource.acquire();
 
-    rmutex.release();
-    tryRead.release();
+    monitorOut();
   }
 
   void unlockReading() {
-    rmutex.acquire();
+    monitorIn();
 
     rcount--;
-    if (rcount == 0)
-      resource.release();
+    if (rcount == 0) {
+      signal(lock);
+    }
 
-    rmutex.release();
+    monitorOut();
   }
 
   void lockWriting() {
-    wmutex.acquire();
+    monitorIn();
 
     wcount++;
-    if (wcount == 1)
-      tryRead.acquire();
+    if (rcount > 0 || wactive) {
+      wait(lock);
+    }
 
-    wmutex.release();
-    resource.acquire();
+    wcount--;
+    wactive = true;
+
+    monitorOut();
   }
 
   void unlockWriting() {
-    resource.release();
-    wmutex.acquire();
+    monitorIn();
 
-    wcount--;
-    if (wcount == 0)
-      tryRead.release();
+    wactive = false;
+    signal(lock);
 
-    wmutex.release();
+    monitorOut();
   }
 };
 
