@@ -14,3 +14,6 @@
 - [x] [Exercise 20.1](ex20p1)
 - [x] [Exercise 20.2](ex20p2)
 - [x] [Exercise 20.3](ex20p3)
+- [x] [Exercise 21.1](ex21p1)
+- [x] [Exercise 21.2](ex21p2)
+- [x] [Exercise 21.3](ex21p3)
