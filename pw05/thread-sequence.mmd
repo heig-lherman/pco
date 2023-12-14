@@ -1,0 +1,57 @@
+sequenceDiagram
+    actor B as Barbier
+    participant S as Salon
+    actor C0 as Client 0
+    actor C1 as Client 1
+
+    activate B
+    note over B: wait() sur wakeUp
+
+    C0->>S: Accède au salon
+    note over S: Attribution d'une chaise
+    S->>C0: Attente sur chaise 0
+    activate C0
+    note over C0: wait() sur chairEmpty
+
+    S-->B: Réveil
+    deactivate B
+    note over B,S: notify() sur wakeUp
+
+    C1-xS: Accède au salon
+    note left of C1: Pas de chaise disponible<br>Retourne false
+
+    B->>S: Prochain client
+    S-->C0: Appel du barbier
+    deactivate C0
+    note over S,C0: notify() sur chairEmpty
+
+    S->>B: Attente du client
+    activate B
+    note over B: wait() sur clientReady
+
+    C1->>S: Accède au salon
+    note over S: Attribution d'une chaise
+    S->>C1: Attente sur chaise 1
+    activate C1
+    note over C1: wait() sur chairEmpty
+
+    C0->>S: Prêt pour la coupe
+    S-->B: Client assis
+    deactivate B
+    note over B,S: notify() sur clientReady
+
+    S->>C0: Attente de la coupe
+    activate C0
+    note over C0: wait() sur haircut
+
+    S->>B: Démarrer la coupe
+    B->>S: Coupe terminée
+    S-->C0: Coupe terminée
+    deactivate C0
+    note over S,C0: notify() sur haircut
+
+    C0->>S: Quitte le salon
+
+    note over B,C1: L'itération continue avec C1 et les autres clients
+    deactivate C1
+
