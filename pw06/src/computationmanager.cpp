@@ -25,6 +25,12 @@ int ComputationManager::requestComputation(Computation c)
 {
     monitorIn();
 
+    if (stopped)
+    {
+        monitorOut();
+        throwStopException();
+    }
+
     if (requests[c.computationType].size() >= MAX_TOLERATED_QUEUE_SIZE)
     {
         tryWait(queueFullCondition[c.computationType]);
@@ -115,6 +121,12 @@ Request ComputationManager::getWork(ComputationType computationType)
 {
     monitorIn();
 
+    if (stopped)
+    {
+        monitorOut();
+        throwStopException();
+    }
+
     if (requests[computationType].empty())
     {
         tryWait(queueEmptyCondition[computationType]);
@@ -194,12 +206,6 @@ void ComputationManager::stop()
 
 void ComputationManager::tryWait(Condition& condition)
 {
-    if (stopped)
-    {
-        monitorOut();
-        throwStopException();
-    }
-
     wait(condition);
 
     if (stopped)
